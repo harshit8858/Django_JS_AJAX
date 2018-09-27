@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
+from django.http import  JsonResponse, HttpResponse
 from .models import *
 from django.db.models import Q
+from .forms import *
 
 
 def index(request):
@@ -9,6 +11,18 @@ def index(request):
         'data': data,
     }
     return render(request, 'js/index.html', context)
+    # return JsonResponse('hi', safe=False)
+
+
+def add(request):
+    if request.method == 'POST':
+        form = TableForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponse('')
+    else:
+        form = TableForm()
+    return render(request, 'js/add.html', {'form':form})
 
 
 def search(request):
