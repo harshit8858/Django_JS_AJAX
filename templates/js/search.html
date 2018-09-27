@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Number
+                </th>
+            </tr>
+        </thead>
+        {% for d in data %}
+            <tbody>
+                <tr>
+                    <td>
+                        {{d.name}}
+                    </td>
+                    <td>
+                        {{d.number}}
+                    </td>
+                </tr>
+            </tbody>
+        {% endfor %}
+    </table>
+
+{% endblock %}
