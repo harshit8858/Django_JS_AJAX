@@ -2,9 +2,10 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
     </head>
     <body>
         {% block content %}
@@ -14,27 +15,31 @@
 </html>
 <script type="text/javascript">
 
-        $('myform').submit(function(event){
-            alert("sjfg");
-            event.preventDefualt();
-            $.ajax({
-                type:'POST',
-                url:'{% url 'js:add' %}',
-                data:{
-                    name:$('#name').val(),
-                    number:$('#number').val(),
-                    csrfmiddlewaretoken:'{{csrf_token}}',
-                },
-                dataType:'json',
-                success:function(response){
-                    $('#myform').html(response['form'])
-                    console.log($('#myform').html(response['form']));
-                },
-                error:function(rs, e){
-                    console.log(rs.responseText);
-                },
-            });
-        });
+        var table = $('#myTable').dataTable();
+        table.on( 'draw', function () {
+            alert( 'Table redrawn' );
+        } );
+        <!--$('myform').submit(function(event){-->
+            <!--alert("sjfg");-->
+            <!--event.preventDefualt();-->
+            <!--$.ajax({-->
+                <!--type:'POST',-->
+                <!--url:'{% url 'js:add' %}',-->
+                <!--data:{-->
+                    <!--name:$('#name').val(),-->
+                    <!--number:$('#number').val(),-->
+                    <!--csrfmiddlewaretoken:'{{csrf_token}}',-->
+                <!--},-->
+                <!--dataType:'json',-->
+                <!--success:function(response){-->
+                    <!--$('#myform').html(response['form'])-->
+                    <!--console.log($('#myform').html(response['form']));-->
+                <!--},-->
+                <!--error:function(rs, e){-->
+                    <!--console.log(rs.responseText);-->
+                <!--},-->
+            <!--});-->
+        <!--});-->
 
     <!--let data = {};-->
     <!--let url = '{% url 'js:add' %}';-->

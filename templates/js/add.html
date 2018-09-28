@@ -9,7 +9,7 @@
         <input type="submit" value="Submit" />
     </form>
 <br/>
-<table id="myTable">
+<table id="myTable" class="table" data-order='[[ 1, "asc" ]]' data-page-length='25'>
         <thead>
             <tr>
                 <th>
@@ -20,8 +20,8 @@
                 </th>
             </tr>
         </thead>
-        {% for d in data %}
-            <tbody>
+        <tbody>
+            {% for d in data %}
                 <tr>
                     <td>
                         {{d.name}}
@@ -30,8 +30,8 @@
                         {{d.number}}
                     </td>
                 </tr>
-            </tbody>
-        {% endfor %}
+            {% endfor %}
+        </tbody>
     </table>
 
 {% endblock %}
