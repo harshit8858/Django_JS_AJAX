@@ -8,6 +8,30 @@
         <input type="number" name="number" id="number" /><br/>
         <input type="submit" value="Submit" />
     </form>
-
+<br/>
+<table id="myTable">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Number
+                </th>
+            </tr>
+        </thead>
+        {% for d in data %}
+            <tbody>
+                <tr>
+                    <td>
+                        {{d.name}}
+                    </td>
+                    <td>
+                        {{d.number}}
+                    </td>
+                </tr>
+            </tbody>
+        {% endfor %}
+    </table>
 
 {% endblock %}

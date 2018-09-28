@@ -11,23 +11,53 @@
         {% endblock %}
     </body>
 
-    <script type="text/javascript">
-        $(document).on('submit','#myform',function(e){
-            alert("hi");
-            e.preventDefualt();
+</html>
+<script type="text/javascript">
 
+        $('myform').submit(function(event){
+            alert("sjfg");
+            event.preventDefualt();
             $.ajax({
                 type:'POST',
-                url:'/add/',
+                url:'{% url 'js:add' %}',
                 data:{
                     name:$('#name').val(),
                     number:$('#number').val(),
-                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+                    csrfmiddlewaretoken:'{{csrf_token}}',
                 },
-                success:function(){
-                    alert("Created");
-                }
+                dataType:'json',
+                success:function(response){
+                    $('#myform').html(response['form'])
+                    console.log($('#myform').html(response['form']));
+                },
+                error:function(rs, e){
+                    console.log(rs.responseText);
+                },
             });
         });
+
+    <!--let data = {};-->
+    <!--let url = '{% url 'js:add' %}';-->
+    <!--let formNode = document.getElementById('myform').querySelectorAll('input');-->
+    <!--let nodeArray = Array.from(formNode);-->
+    <!--nodeArray[2].addEventListener('click',submitData);-->
+
+    <!--function submitData(e){-->
+        <!--e.preventDefault();-->
+        <!--nodeArray.splice(0,3).map(function(item){-->
+          <!--data[item.name]=item.value;-->
+        <!--});-->
+        <!--console.log(data) //  Form Data-->
+        <!--fetch(url, {-->
+            <!--method: 'POST',-->
+            <!--body: JSON.stringify(data),-->
+            <!--headers: {-->
+            <!--"Content-type": "application/json"-->
+            <!--}-->
+        <!--})-->
+        <!--.then(response => response.json())-->
+        <!--.then(json => console.log(json))-->
+        <!--.catch(error => console.error('Error:', error));-->
+    <!--}-->
+
     </script>
-</html>
